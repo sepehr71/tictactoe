@@ -23,5 +23,8 @@ function cpuAction() {
     judge();
 }
 function judge() {
+    if (tictactoe.items[0] === 'x' && tictactoe.items[0] === tictactoe.items[3] && tictactoe.items[3] === tictactoe.items[6]) {
 
+    }
+    if (tictactoe.item[0] === 'x' && tictactoe.items[0] === tictactoe.items[1] && tictactoe.items[1] === tictactoe.items[2])
 }
