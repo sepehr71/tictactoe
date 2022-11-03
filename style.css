@@ -1,9 +1,13 @@
-.tbl-main {
+.all {
     display: flex;
-    width: 100%;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
+}
+
+.tbl-main {
+    margin-bottom: 5px;
 }
 
 table,
@@ -11,7 +15,6 @@ th,
 td {
     border: 1px solid white;
     border-collapse: collapse;
-
 }
 
 th,
@@ -21,6 +24,6 @@ td {
     margin: 20px;
 }
 
-button {
-    padding: 30px;
+.score {
+    background-color: bisque;
 }
