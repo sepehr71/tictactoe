@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+
 }
 
 .tbl-main {
@@ -20,7 +21,7 @@ td {
 th,
 td {
     background-color: #96D4D4;
-    padding: 30px;
+    padding: 29px;
     margin: 20px;
 }
 
