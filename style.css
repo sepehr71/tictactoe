@@ -7,6 +7,12 @@
 
 }
 
+td {
+    color: blue;
+
+
+}
+
 .tbl-main {
     margin-bottom: 5px;
 }
@@ -16,6 +22,7 @@ th,
 td {
     border: 1px solid white;
     border-collapse: collapse;
+    font-size: xx-large;
 }
 
 th,
