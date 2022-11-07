@@ -26,52 +26,52 @@ function cpuAction() {
 
         steps.forEach(step => {
             for (let key in step.points) {
-                if (tictactoe.items[step.points[key]] === 'o' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === '-') {
+                if (!success && tictactoe.items[step.points[key]] === 'o' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === '-') {
                     tictactoe.items[step.points[key] + step.diff + step.diff] = 'o';
                     document.getElementById(step.points[key] + step.diff + step.diff).textContent = 'o';
                     success = true;
                     judge();
-                    return;
+
                 }
-                else if (tictactoe.items[step.points[key] + step.diff] === 'o' && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key]] === '-') {
+                else if (!success && tictactoe.items[step.points[key] + step.diff] === 'o' && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key]] === '-') {
                     tictactoe.items[step.points[key]] = 'o';
                     document.getElementById(step.points[key]).textContent = 'o';
                     success = true;
                     judge();
-                    return;
+
                 }
-                else if (tictactoe.items[step.points[key]] === 'o' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key] + step.diff] === '-') {
+                else if (!success && tictactoe.items[step.points[key]] === 'o' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key] + step.diff] === '-') {
                     tictactoe.items[step.points[key] + step.diff] = 'o';
                     document.getElementById(step.points[key] + step.diff).textContent = 'o';
                     success = true;
                     judge();
-                    return;
+
                 }
             }
         })
         if (!success) {
             steps.forEach(step => {
                 for (let key in step.points) {
-                    if (tictactoe.items[step.points[key]] === 'x' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === '-') {
+                    if (!success && tictactoe.items[step.points[key]] === 'x' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === '-') {
                         tictactoe.items[step.points[key] + step.diff + step.diff] = 'o';
                         document.getElementById(step.points[key] + step.diff + step.diff).textContent = 'o';
                         success = true;
                         judge();
-                        return;
+
                     }
-                    else if (tictactoe.items[step.points[key] + step.diff] === 'x' && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key]] === '-') {
+                    else if (!success && tictactoe.items[step.points[key] + step.diff] === 'x' && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key]] === '-') {
                         tictactoe.items[step.points[key]] = 'o';
                         document.getElementById(step.points[key]).textContent = 'o';
                         success = true;
                         judge();
-                        return;
+
                     }
-                    else if (tictactoe.items[step.points[key]] === 'x' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key] + step.diff] === '-') {
+                    else if (!success && tictactoe.items[step.points[key]] === 'x' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key] + step.diff] === '-') {
                         tictactoe.items[step.points[key] + step.diff] = 'o';
                         document.getElementById(step.points[key] + step.diff).textContent = 'o';
                         success = true;
                         judge();
-                        return;
+
                     }
                 }
             })
@@ -94,7 +94,7 @@ function judge() {
         { diff: 1, start: [0, 3, 6] },
         { diff: 2, start: [2] },
         { diff: 3, start: [0, 1, 2] },
-        { diff: 4, start: [4] }
+        { diff: 4, start: [0] }
     ]
 
     steps.forEach(step => {
