@@ -108,3 +108,11 @@ function judge() {
         }
     })
 }
+
+function clearTable(){
+   tictactoe.items = ['-','-','-','-','-','-','-','-','-'];
+   tictactoe.isFinished=false;
+   for(let key in tictactoe.items)
+   document.getElementById(key).textContent=null;
+   document.getElementById('score-winner').textContent=null;
+}
