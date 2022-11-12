@@ -10,28 +10,22 @@
 
   <body>
     <div class="all">
-      <div class="tbl-main">
-        <table>
-          <tr>
-            <td id="0" onclick="change(0)"></td>
-            <td id="1" onclick="change(1)"></td>
-            <td id="2" onclick="change(2)"></td>
-          </tr>
-          <tr>
-            <td id="3" onclick="change(3)"></td>
-            <td id="4" onclick="change(4)"></td>
-            <td id="5" onclick="change(5)"></td>
-          </tr>
-          <tr>
-            <td id="6" onclick="change(6)"></td>
-            <td id="7" onclick="change(7)"></td>
-            <td id="8" onclick="change(8)"></td>
-          </tr>
-        </table>
+      <div class="table_tictactoe">
+        <div class="table_element" id="0" onclick="change(0)"></div>
+        <div class="table_element" id="1" onclick="change(1)"></div>
+        <div class="table_element" id="2" onclick="change(2)"></div>
+        <div class="table_element" id="3" onclick="change(3)"></div>
+        <div class="table_element" id="4" onclick="change(4)"></div>
+        <div class="table_element" id="5" onclick="change(5)"></div>
+        <div class="table_element" id="6" onclick="change(6)"></div>
+        <div class="table_element" id="7" onclick="change(7)"></div>
+        <div class="table_element" id="8" onclick="change(8)"></div>
       </div>
+
       <div class="score">
-        <p>winner is <a id="score-winner"></a></p>
+        <p>winner is : <a id="score-winner"></a></p>
       </div>
+
       <div>
         <input type="button" onclick="clearTable()" value="clear" />
       </div>

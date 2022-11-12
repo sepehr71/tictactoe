@@ -7,31 +7,15 @@
 
 }
 
-td {
-    color: blue;
-
-
+.table_tictactoe {
+    display: grid;
+    grid-template:repeat(3,100px)/repeat(3,100px); 
+    gap: 3px;
 }
-
-.tbl-main {
-    margin-bottom: 5px;
-}
-
-table,
-th,
-td {
-    border: 1px solid white;
-    border-collapse: collapse;
+.table_element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #70b8d9;
     font-size: xx-large;
-}
-
-th,
-td {
-    background-color: #96D4D4;
-    padding: 29px;
-    margin: 20px;
-}
-
-.score {
-    background-color: bisque;
 }
