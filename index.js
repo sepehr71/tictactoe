@@ -1,20 +1,25 @@
 let tictactoe = {
     items: ['-', '-', '-', '-', '-', '-', '-', '-', '-'],
-    isFinished: false
+    isFinished: false,
+    isYourTurn: true
 }
 
 function change(position) {
-    if (tictactoe.items[position] === '-' && tictactoe.isFinished === false) {
+    if (tictactoe.items[position] === '-' && tictactoe.isFinished === false && tictactoe.isYourTurn === true) {
         document.getElementById(position).textContent = 'x';
+        tictactoe.isYourTurn = false;
         tictactoe.items[position] = 'x';
         judge();
-        cpuAction();
+        setTimeout(() => {
+            cpuAction();
+        }, 1500)
+
     }
 }
 
 
 function cpuAction() {
-
+    tictactoe.isYourTurn = true;
     if (tictactoe.isFinished === false) {
         const steps = [
             { points: [0, 3, 6], diff: 1 },
@@ -87,6 +92,7 @@ function cpuAction() {
             }
 
     }
+
 }
 
 function judge() {
@@ -103,16 +109,22 @@ function judge() {
                 && tictactoe.items[step.start[key]] === tictactoe.items[step.start[key] + step.diff]
                 && tictactoe.items[step.start[key] + step.diff] === tictactoe.items[step.start[key] + step.diff + step.diff]) {
                 document.getElementById("score-winner").textContent = tictactoe.items[step.start[key]];
+                // changing color place of winner player 
+                document.getElementById(step.start[key]).style.backgroundColor = '#F56e6e';
+                document.getElementById(step.start[key] + step.diff).style.backgroundColor = '#F56e6e';
+                document.getElementById(step.start[key] + step.diff + step.diff).style.backgroundColor = '#F56e6e';
                 tictactoe.isFinished = true;
             }
         }
     })
 }
 
-function clearTable(){
-   tictactoe.items = ['-','-','-','-','-','-','-','-','-'];
-   tictactoe.isFinished=false;
-   for(let key in tictactoe.items)
-   document.getElementById(key).textContent=null;
-   document.getElementById('score-winner').textContent=null;
+function clearTable() {
+    tictactoe.items = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
+    tictactoe.isFinished = false;
+    for (let key in tictactoe.items) {
+        document.getElementById(key).textContent = null;
+        document.getElementById(key).style.backgroundColor = '#70b8d9';
+    }
+    document.getElementById('score-winner').textContent = null;
 }
