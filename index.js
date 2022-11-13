@@ -28,7 +28,6 @@ function cpuAction() {
             { points: [0], diff: 4 }
         ]
         let success = false;
-
         steps.forEach(step => {
             for (let key in step.points) {
                 if (!success && tictactoe.items[step.points[key]] === 'o' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === '-') {
@@ -81,15 +80,43 @@ function cpuAction() {
                 }
             })
         }
-        if (!success)
-            for (let item in tictactoe.items) {
-                if (tictactoe.items[item] === '-') {
-                    document.getElementById(item).textContent = 'o';
-                    tictactoe.items[item] = 'o';
-                    judge();
-                    return;
+        if (!success) {
+            steps.forEach(step => {
+                for (let key in step.points) {
+                    if (!success && tictactoe.items[step.points[key]] === '-' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff] && tictactoe.items[step.points[key] + step.diff + step.diff] === 'o') {
+                        tictactoe.items[step.points[key]] = 'o';
+                        document.getElementById(step.points[key]).textContent = 'o';
+                        success = true;
+                        judge();
+
+                    }
+                    else if (!success && tictactoe.items[step.points[key] + step.diff] === '-' && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key]] === 'o') {
+                        tictactoe.items[step.points[key] + step.diff] = 'o';
+                        document.getElementById(step.points[key] + step.diff).textContent = 'o';
+                        success = true;
+                        judge();
+
+                    }
+                    else if (!success && tictactoe.items[step.points[key]] === '-' && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff] && tictactoe.items[step.points[key] + step.diff] === 'o') {
+                        tictactoe.items[step.points[key] + step.diff + step.diff] = 'o';
+                        document.getElementById(step.points[key] + step.diff + step.diff).textContent = 'o';
+                        success = true;
+                        judge();
+
+                    }
                 }
+            })
+        }
+        const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+        if (!success) {
+            let stack = [];
+            for (let item in tictactoe.items) {
+                if (tictactoe.items[item] === '-')
+                    stack.push(item);
             }
+
+
+        }
 
     }
 
