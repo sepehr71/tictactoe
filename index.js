@@ -1,19 +1,21 @@
-let tictactoe = {
+const tictactoe = {
     items: ['-', '-', '-', '-', '-', '-', '-', '-', '-'],
     isFinished: false,
     isYourTurn: true
 }
 
 function change(position) {
-    if (tictactoe.items[position] === '-' && tictactoe.isFinished === false && tictactoe.isYourTurn === true) {
+    if (tictactoe.items[position] === '-' && tictactoe.items[position] !== 'o' && tictactoe.isYourTurn === true) {
         document.getElementById(position).textContent = 'x';
         tictactoe.isYourTurn = false;
         tictactoe.items[position] = 'x';
+        console.log(tictactoe.items);
         judge();
+        if(tictactoe.isFinished!==true){
         setTimeout(() => {
             cpuAction();
         }, 1500)
-
+    }
     }
 }
 
@@ -25,7 +27,7 @@ function assigner(position) {
 
 function cpuAction() {
     tictactoe.isYourTurn = true;
-    if (tictactoe.isFinished === false) {
+    
         const steps = [
             { points: [0, 3, 6], diff: 1 },
             { points: [2], diff: 2 },
@@ -47,6 +49,7 @@ function cpuAction() {
                         && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff]
                         && tictactoe.items[step.points[key] + step.diff + step.diff] === element2) {
                         success = true;
+                        console.log('1-section');
                         if (element2 === '-')
                             assigner(step.points[key] + step.diff + step.diff);
                         else
@@ -57,6 +60,7 @@ function cpuAction() {
                         && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff]
                         && tictactoe.items[step.points[key]] === element2) {
                         success = true;
+                        console.log('2-section');
                         if (element2 === '-')
                             assigner(step.points[key]);
                         else
@@ -67,6 +71,7 @@ function cpuAction() {
                         && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff]
                         && tictactoe.items[step.points[key] + step.diff] === element2) {
                         success = true;
+                        console.log('3-section');
                         if (element2 === '-')
                             assigner(step.points[key] + step.diff);
                         else
@@ -77,18 +82,26 @@ function cpuAction() {
         }
 
         const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-        if (!success) {
+        
+        if (!success && !tictactoe.isFinished) {
             let guessBox = [];
             for (let item in tictactoe.items)
-                if (tictactoe.items[item] === '-')
-                    guessBox.push(tictactoe.items[item]);
-
-            let guessBox_selected = random(0, guessBox.length + 1);
-            document.getElementById(guessBox_selected).textContent = 'o';
-            tictactoe.items[guessBox_selected] = 'o';
+                if (tictactoe.items[item] === '-'){
+                    guessBox.push(item);
+                    console.log(item);
+                }
+            if(guessBox.length!==0){
+                console.log('4-section');
+            let guessBox_selected = random(0, guessBox.length);
+            console.log(guessBox_selected);
+            document.getElementById(guessBox[guessBox_selected]).textContent = 'o';
+            tictactoe.items[guessBox[guessBox_selected]] = 'o';   
+            console.log(guessBox);
             guessBox.length = 0;
+            judge();
+          }
         }
-    }
+    
 }
 
 function judge() {
@@ -113,11 +126,17 @@ function judge() {
             }
         }
     })
+   let founded = tictactoe.items.find(element => element ==='-');
+   if(founded===null){
+   tictactoe.isFinished = true;
+   document.getElementById("score-winner").textContent ='even';
+}
 }
 
 function clearTable() {
     tictactoe.items = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
-    tictactoe.isFinished = false;
+    tictactoe.isFinished =false;
+    tictactoe.isYourTurn = true;
     for (let key in tictactoe.items) {
         document.getElementById(key).textContent = null;
         document.getElementById(key).style.backgroundColor = '#70b8d9';
