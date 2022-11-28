@@ -9,13 +9,13 @@ function change(position) {
         document.getElementById(position).textContent = 'x';
         tictactoe.isYourTurn = false;
         tictactoe.items[position] = 'x';
-        console.log(tictactoe.items);
+
         judge();
-        if(tictactoe.isFinished!==true){
-        setTimeout(() => {
-            cpuAction();
-        }, 1500)
-    }
+        if (tictactoe.isFinished !== true) {
+            setTimeout(() => {
+                cpuAction();
+            }, 1500)
+        }
     }
 }
 
@@ -27,81 +27,77 @@ function assigner(position) {
 
 function cpuAction() {
     tictactoe.isYourTurn = true;
-    
-        const steps = [
-            { points: [0, 3, 6], diff: 1 },
-            { points: [2], diff: 2 },
-            { points: [0, 1, 2], diff: 3 },
-            { points: [0], diff: 4 }
-        ]
-        let success = false;
 
-        tryToWin('o', '-');
-        tryToWin('x', '-');
-        tryToWin('-', 'o');
+    const steps = [
+        { points: [0, 3, 6], diff: 1 },
+        { points: [2], diff: 2 },
+        { points: [0, 1, 2], diff: 3 },
+        { points: [0], diff: 4 }
+    ]
+    let success = false;
 
-        function tryToWin(element1, element2) {
+    tryToWin('o', '-');
+    tryToWin('x', '-');
+    tryToWin('-', 'o');
 
-            steps.forEach(step => {
-                for (let key in step.points) {
-                    if (!success
-                        && tictactoe.items[step.points[key]] === element1
-                        && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff]
-                        && tictactoe.items[step.points[key] + step.diff + step.diff] === element2) {
-                        success = true;
-                        console.log('1-section');
-                        if (element2 === '-')
-                            assigner(step.points[key] + step.diff + step.diff);
-                        else
-                            assigner(step.points[key]);
-                    }
-                    else if (!success
-                        && tictactoe.items[step.points[key] + step.diff] === element1
-                        && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff]
-                        && tictactoe.items[step.points[key]] === element2) {
-                        success = true;
-                        console.log('2-section');
-                        if (element2 === '-')
-                            assigner(step.points[key]);
-                        else
-                            assigner(step.points[key] + step.diff);
-                    }
-                    else if (!success
-                        && tictactoe.items[step.points[key]] === element1
-                        && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff]
-                        && tictactoe.items[step.points[key] + step.diff] === element2) {
-                        success = true;
-                        console.log('3-section');
-                        if (element2 === '-')
-                            assigner(step.points[key] + step.diff);
-                        else
-                            assigner(step.points[key] + step.diff + step.diff);
-                    }
+    function tryToWin(element1, element2) {
+
+        steps.forEach(step => {
+            for (let key in step.points) {
+                if (!success
+                    && tictactoe.items[step.points[key]] === element1
+                    && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff]
+                    && tictactoe.items[step.points[key] + step.diff + step.diff] === element2) {
+                    success = true;
+
+                    if (element2 === '-')
+                        assigner(step.points[key] + step.diff + step.diff);
+                    else
+                        assigner(step.points[key]);
                 }
-            })
-        }
+                else if (!success
+                    && tictactoe.items[step.points[key] + step.diff] === element1
+                    && tictactoe.items[step.points[key] + step.diff] === tictactoe.items[step.points[key] + step.diff + step.diff]
+                    && tictactoe.items[step.points[key]] === element2) {
+                    success = true;
 
-        const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-        
-        if (!success && !tictactoe.isFinished) {
-            let guessBox = [];
-            for (let item in tictactoe.items)
-                if (tictactoe.items[item] === '-'){
-                    guessBox.push(item);
-                    console.log(item);
+                    if (element2 === '-')
+                        assigner(step.points[key]);
+                    else
+                        assigner(step.points[key] + step.diff);
                 }
-            if(guessBox.length!==0){
-                console.log('4-section');
+                else if (!success
+                    && tictactoe.items[step.points[key]] === element1
+                    && tictactoe.items[step.points[key]] === tictactoe.items[step.points[key] + step.diff + step.diff]
+                    && tictactoe.items[step.points[key] + step.diff] === element2) {
+                    success = true;
+
+                    if (element2 === '-')
+                        assigner(step.points[key] + step.diff);
+                    else
+                        assigner(step.points[key] + step.diff + step.diff);
+                }
+            }
+        })
+    }
+
+    const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+
+    if (!success && !tictactoe.isFinished) {
+        let guessBox = [];
+        for (let item in tictactoe.items)
+            if (tictactoe.items[item] === '-')
+                guessBox.push(item);
+
+        if (guessBox.length !== 0) {
             let guessBox_selected = random(0, guessBox.length);
-            console.log(guessBox_selected);
             document.getElementById(guessBox[guessBox_selected]).textContent = 'o';
-            tictactoe.items[guessBox[guessBox_selected]] = 'o';   
-            console.log(guessBox);
+            tictactoe.items[guessBox[guessBox_selected]] = 'o';
             guessBox.length = 0;
             judge();
-          }
         }
-    
+    }
+
 }
 
 function judge() {
@@ -126,16 +122,16 @@ function judge() {
             }
         }
     })
-   let founded = tictactoe.items.find(element => element ==='-');
-   if(founded===null){
-   tictactoe.isFinished = true;
-   document.getElementById("score-winner").textContent ='even';
-}
+    let founded = tictactoe.items.find(element => element === '-');
+    if (founded === null) {
+        tictactoe.isFinished = true;
+        document.getElementById("score-winner").textContent = 'even';
+    }
 }
 
 function clearTable() {
     tictactoe.items = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
-    tictactoe.isFinished =false;
+    tictactoe.isFinished = false;
     tictactoe.isYourTurn = true;
     for (let key in tictactoe.items) {
         document.getElementById(key).textContent = null;
